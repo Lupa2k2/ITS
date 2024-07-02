@@ -1,0 +1,56 @@
+Differenza tra waterfall e agile
+
+waterfall:
+- approccio lineare e sequenziale
+- approccio rigido, documentazione estesa, consegna alla fine del progetto
+- adatto per progetti con requisiti chiari e stabili, dove le modifiche sono rare e costose
+
+agile:
+- approccio iterattivo e incrementale
+- flessibile, feedback continuo, consegne frequenti con piccole modifiche funzionanti
+- ideale per progetti complessi e in evoluzione, dove i requisiti possono cambiare frequentemente e il coinvolgimento continuo del cliente è essenziale.
+
+
+principi dell'agile:
+- individui e iterazioni > processi e strumenti
+- software funzionante (misura del progresso) > documentazione esaustiva
+- collaborazione col cliente > negoziazione contrattuale
+- rispondere al cambiamento > seguire un piano
+
+
+AGILE:
+- soddisfare il cliente tramite continua consegna di software di valore frequentemente
+- accogliere i cambiamenti nei requisiti, anche in fase avanzata di sviluppo
+- collaborazione continua tra business e sviluppatori
+- costruire progetti attorno a individui motivati
+- il software funzionante è il metro di misura del progresso
+- attenzione continua all'eccellenza tecnica e al buon design
+- team auto-organizzati
+- a intervalli regolari, il team riflette su come diventare più efficace e regola il proprio comportamento di conseguenza
+
+
+SCRUM:
+framework leggero per la gestione di progetti complessi, basato su tre pilastri:
+
+- trasparenza: il processo deve essere visibile ai responsabili dei risultati
+- ispezione: i vari aspetti del processo devono essere ispezionati frequentemente
+- adattamento: se uno o più aspetti del progetto deviano dai limiti accettabili, il processo deve essere regolato
+
+Ruoli Scrum
+- product owner: responsabile di massimizzare il valore del prodotto
+- scrum master: garantisce che Scrum sia compreso e adottato, facilitando il processo e aiutando il team a rimuovere impedimenti
+- team di sviluppo: gruppo che lavora su tutti gli aspetti della creazione del prodotto
+
+
+Artefatti Scrum
+- product backlog: lista di ciò che serve per realizzare il prodotto
+- sprint: intervallo di tempo fisso durante il quale avviene un miglioramento del prodotto
+- sprint planning: incontro all'inizio dello sprint per pianificare il lavoro da svolgere
+- sprint review: incontro alla fine dello sprint per ispezionare l'incremento e adattare il Product Backlog.
+
+
+STORY POINTS, VELOCITY e DEFINITION OF DONE
+
+Story points: unità astratta di misura focalizzata sulla valutazione relativa piuttosto che sul valore assoluto.
+Velocity: misura del lavoro completato da un team in uno Sprint.
+Definition of Done: elenco di criteri che devono essere soddisfatti prima che un incremento del prodotto sia considerato "completo"
