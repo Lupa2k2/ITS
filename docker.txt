@@ -1,0 +1,125 @@
+DOCKER
+Docker è una piattaforma che permette di sviluppare, eseguire e gestire applicazioni in container. 
+È basata su un'architettura Client-Server composta dal Docker-Client e dal Docker-Daemon. 
+Il Docker-Client invia comandi al Docker-Daemon tramite API o Docker Desktop; il Docker-Daemon builda, esegue e distribuisce i container.
+
+VM vs CONTAINER
+A differenza delle macchine virtuali, i container sono leggeri e condividono il kernel dell'host, rendendoli più efficienti nell'uso delle risorse. 
+Questo approccio riduce il consumo di risorse e migliora la portabilità delle applicazioni.
+
+IMMAGINI e CONTAINER
+- Un'immagine Docker è un template di sola lettura contenente tutto il necessario per eseguire un container, inclusi il codice applicativo, le librerie, le variabili di ambiente e i file di configurazione. Le immagini sono immutabili, il che significa che una volta create, non possono essere modificate. Le immagini possono essere scaricate da registri pubblici come Docker Hub o possono essere create da zero utilizzando un Dockerfile.
+
+- Un Dockerfile è un file di testo contenente una serie di istruzioni per creare un'immagine Docker. Ogni istruzione nel Dockerfile aggiunge un layer all'immagine, definendo step-by-step come costruire l'immagine finale. Le istruzioni possono includere l'installazione di software, la copia di file, l'impostazione di variabili di ambiente, e l'esecuzione di comandi.
+
+DOCKER COMPOSE
+Docker Compose è uno strumento che permette di definire e gestire applicazioni multi-container. Utilizza un file YAML (docker-compose.yaml) per configurare i servizi necessari, le reti e i volumi. Docker Compose semplifica la gestione di applicazioni complesse che richiedono più container, permettendo di avviare e gestire tutto con un singolo comando.
+
+DOCKER SWARM
+Docker Swarm è uno strumento di orchestrazione nativo di Docker che permette di creare e gestire cluster di container distribuiti su più host. Docker Swarm trasforma un gruppo di macchine Docker in un cluster coordinato, offrendo funzionalità avanzate di orchestrazione e gestione dei container.
+
+Un cluster Docker è un gruppo di nodi (server) che lavorano insieme per eseguire e gestire container. Un cluster può essere creato utilizzando Docker Swarm, che è la soluzione di orchestrazione nativa di Docker. In un cluster Docker, i nodi possono avere uno dei due ruoli principali: Manager e Worker.
+
+- Nodi Manager: Gestiscono lo stato del cluster, prendono decisioni di orchestrazione come l'allocazione dei servizi, il bilanciamento del carico e la gestione degli aggiornamenti dei servizi. Utilizzano il protocollo di consenso Raft per mantenere una visione consistente dello stato del cluster.
+
+- Nodi Worker: Eseguono i container e gestiscono le applicazioni distribuite dai nodi Manager. Non partecipano alle decisioni di gestione del cluster ma sono essenziali per l'esecuzione delle applicazioni containerizzate.
+
+Un cluster Docker Swarm offre vantaggi come alta disponibilità, scalabilità, bilanciamento del carico, sicurezza e gestione centralizzata delle applicazioni.
+
+
+Multi-Stage Build
+Il multi-stage build è una tecnica utilizzata nei Dockerfile per creare immagini Docker più leggere e modulari. Questa tecnica consente di utilizzare più fasi (stages) di build in un singolo Dockerfile, permettendo di separare le dipendenze e le operazioni necessarie per costruire l'applicazione da quelle necessarie per eseguire l'applicazione. Questo approccio riduce la dimensione dell'immagine finale, poiché elimina le dipendenze e i file temporanei non necessari per il runtime.
+
+
+RUN vs EXEC
+Il comando RUN viene utilizzato nei Dockerfile per eseguire comandi durante la fase di build di un'immagine Docker. Ogni comando RUN crea un nuovo layer nell'immagine Docker. Questo è il momento in cui vengono installate le dipendenze, copiati i file, configurati i servizi, ecc. I risultati di questi comandi sono parte integrante dell'immagine Docker risultante.
+
+Il comando docker EXEC viene utilizzato per eseguire comandi in un container Docker già in esecuzione. Questo è utile per eseguire comandi di debug, ispezione, gestione, o per interagire con applicazioni che sono in esecuzione all'interno del container. Il comando docker exec non modifica l'immagine Docker; piuttosto, interagisce direttamente con un container attivo.
+
+
+
+
+
+
+
+
+
+
+
+DockerFile
+
+FROM node:latest as builder
+WORKDIR /
+RUN npm install -g @angular/cli \
+    && ng new hello_world \
+    && cd hello_world \
+    && ng build
+
+Questo è il primo stage di un Dockerfile multi-stage. Utilizza l'immagine Node.js più recente (node:latest) e nomina questo stage come builder. Imposta la directory di lavoro alla radice (/), installa Angular CLI globalmente, crea un nuovo progetto Angular chiamato hello_world e lo compila.
+
+FROM nginx:alpine
+COPY --from=builder /hello_world/dist/hello_world/* /usr/share/nginx/html/
+EXPOSE 80
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+
+Questo è il secondo stage del Dockerfile multi-stage. Utilizza un'immagine leggera di Nginx basata su Alpine (nginx:alpine). Copia i file costruiti nel primo stage nella directory di Nginx, espone la porta 80 e avvia Nginx in modalità foreground.
+
+
+
+
+
+
+
+Docker compose
+
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: userpassword
+      WORDPRESS_DB_NAME: wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - wp_data:/var/www/html
+
+volumes:
+  db_data:
+  wp_data:
+
+
+
+
+Il file utilizza la versione 3 del formato Docker Compose.
+
+Sono definiti due servizi principali: db (MySQL) e wordpress.
+
+Servizio MySQL (db):
+Utilizza l'immagine Docker di MySQL versione 5.7.
+Imposta le variabili d'ambiente per configurare il database, tra cui la password di root, il nome del database, l'utente e la password dell'utente.
+Definisce un volume (db_data) per la persistenza dei dati del database, garantendo che i dati non vadano persi quando il container viene ricreato.
+
+Servizio WordPress (wordpress):
+Dipende dal servizio db, assicurando che MySQL venga avviato prima di WordPress.
+Utilizza l'immagine Docker più recente di WordPress.
+Imposta le variabili d'ambiente per configurare WordPress, inclusi l'host del database, l'utente del database, la password e il nome del database.
+
+Mappa la porta 8080 dell'host alla porta 80 del container, rendendo l'applicazione WordPress accessibile sulla porta 8080 dell'host.
+Definisce un volume (wp_data) per la persistenza dei dati di WordPress, assicurando che i dati non vadano persi quando il container viene ricreato.
+
+Due volumi sono definiti: db_data per MySQL e wp_data per WordPress, entrambi utilizzati per garantire la persistenza dei dati.
