@@ -1,0 +1,149 @@
+INDICI
+
+Migliorano la velocità delle operazioni di lettura.
+
+Tipi di indici:
+- singoli: Su un singolo campo
+- compositi: Su più campi
+- unici: Garantiscono l'unicità dei valori
+- testuali: Per la ricerca testuale
+
+Indice Singolo:
+db.collection.createIndex({ campo: 1 });
+
+Indice Composito:
+db.collection.createIndex({ campo1: 1, campo2: -1 });
+
+Indice Unico:
+db.collection.createIndex({ campo: 1 }, { unique: true });
+
+Indice Geospaziale:
+db.collection.createIndex({ location: "2dsphere" });
+
+Indice Testuale:
+db.collection.createIndex({ testo: "text" });
+
+Indice Hashed:
+db.collection.createIndex({ campo: "hashed" });
+
+
+Schemi JSON in MongoDB
+
+MongoDB utilizza JSON per memorizzare i documenti.
+Strutture JSON:
+- Oggetti: Collezioni non ordinate di coppie nome/valore.
+- Array: Collezioni ordinate di valori.
+
+
+CREAZIONE DI OGGETTI
+
+{
+    "nome": "Mario",
+    "cognome": "Rossi",
+    "eta": 25,
+    "matricola": 12345,
+    "iscrizioneAttiva": true
+}
+Aggiunta di Sottolivelli di Informazioni:
+
+{
+    "nome": "Mario",
+    "cognome": "Rossi",
+    "eta": 25,
+    "matricola": 12345,
+    "iscrizioneAttiva": true,
+    "indirizzo": {
+        "via": "Via Roma",
+        "citta": "Milano"
+    },
+    "esami": [
+        {
+            "nome": "Matematica",
+            "voto": 28
+        },
+        {
+            "nome": "Informatica",
+            "voto": 30
+        }
+    ]
+}
+
+
+
+RELAZIONI
+
+Relazioni: MongoDB utilizza tecniche come embedding e referencing.
+Embedding: Incapsulare documenti all'interno di altri documenti.
+Referencing: Utilizzare riferimenti per collegare documenti.
+
+
+{
+    "nome": "Mario",
+    "esami": [
+        {
+            "nome": "Matematica",
+            "voto": 28
+        },
+        {
+            "nome": "Informatica",
+            "voto": 30
+        }
+    ]
+}
+Referencing:
+
+// Documento Studente
+{
+    "nome": "Mario",
+    "esamiIds": [1, 2]
+}
+
+// Documento Esami
+{
+    "_id": 1,
+    "nome": "Matematica",
+    "voto": 28
+}
+{
+    "_id": 2,
+    "nome": "Informatica",
+    "voto": 30
+}
+
+
+
+OPERAZIONI CON IL FIND()
+
+find(): Utilizzato per leggere documenti da una collezione.
+Esempi di Codice
+Trova tutti i documenti:
+
+db.nomeCollection.find({});
+Trova documenti con una condizione:
+
+db.nomeCollection.find({ age: { $gt: 25 } });
+Trova documenti con più condizioni:
+
+db.nomeCollection.find({ age: { $gt: 25 }, isActive: true });
+
+
+
+
+JSON e BSON
+
+JSON (JavaScript Object Notation)
+JSON è un formato di testo per lo scambio di dati tra client e server, facile da leggere per le persone e da generare e analizzare per le macchine.
+Oggetti (collezioni non ordinate di coppie nome/valore) e array (collezioni ordinate di valori).
+
+
+BSON (Binary JSON)
+BSON è una serializzazione binaria di JSON-like documents. 
+Utilizzato internamente da MongoDB per memorizzare i documenti.
+Più efficiente in termini di spazio e velocità di elaborazione rispetto al testo JSON.
+Supporta più tipi di dati rispetto a JSON, come date e binari nativi.
+
+
+Differenze tra JSON e BSON
+BSON è più efficiente di JSON sia in termini di spazio che di velocità di elaborazione.
+BSON supporta tipi di dati non disponibili in JSON, come date e binari.
+JSON è usato principalmente per la trasmissione di dati tra client e server, mentre BSON è utilizzato internamente da MongoDB per la memorizzazione efficiente dei dati.
