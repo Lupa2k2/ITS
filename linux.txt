@@ -1,0 +1,86 @@
+INTERRUPT
+Gli interrupt sono segnali hardware che richiedono l'attenzione immediata della CPU. Interrompono l'esecuzione corrente del processore per gestire un'operazione urgente, dopo di che la CPU riprende il lavoro precedente. Un'eccessiva frequenza di interrupt può rallentare la CPU.
+
+DIRECT MEMORY ACCESS (DMA)
+Il DMA permette ai dispositivi di trasferire dati direttamente alla memoria principale senza coinvolgere la CPU, migliorando l'efficienza del sistema.
+
+/PROC FILESYSTEM
+Il filesystem /proc è creato dal Kernel per monitorare lo stato dei processi e configurare parametri di sistema in tempo reale. Contiene file come:
+
+/proc/cpuinfo: Informazioni sul processore.
+/proc/meminfo: Informazioni sulla RAM.
+/proc/interrupts: Visualizza gli interrupt in uso.
+HOT PLUG E COLD PLUG
+Hot Plug: Permette l'aggiunta di componenti senza spegnere il sistema.
+Cold Plug: Richiede lo spegnimento del sistema per aggiungere o rimuovere componenti.
+CPU
+La CPU è il componente principale che esegue e gestisce le istruzioni del sistema operativo e dei software, elaborando operazioni aritmetiche e logiche.
+
+LSCPU
+Il comando lscpu fornisce dettagli sull'architettura della CPU, come modello, velocità, cache, numero di core e supporto delle flag.
+
+PCI E LSPCI
+PCI: Interfaccia per collegare componenti hardware.
+lspci: Mostra informazioni sui dispositivi PCI collegati.
+USB E LSUSB
+USB: Interfaccia standard per la comunicazione tra dispositivi e computer.
+lsusb: Visualizza l'elenco dei dispositivi USB collegati.
+KERNEL
+Il Kernel è il cuore del sistema operativo che gestisce risorse hardware e software. I moduli del Kernel possono estendere le sue funzionalità senza riavviare il sistema.
+
+LSMOD E MODINFO
+lsmod: Visualizza i moduli del Kernel caricati.
+modinfo: Fornisce informazioni dettagliate sui moduli del Kernel.
+BIOS VS UEFI
+BIOS: Sistema di firmware tradizionale per inizializzare l'hardware.
+UEFI: Sistema di firmware moderno con più funzionalità e interfaccia grafica.
+AVVIO DI UN PC
+Il processo di avvio include il boot, il caricamento del bootloader (GRUB), l'Initial RamDisk, l'avvio del Kernel e del sistema di init, fino al Display Manager e all'accesso al desktop.
+
+SYSTEMD E SYSTEMV
+systemd: Sistema di gestione dei servizi moderno con file .service.
+SystemV: Sistema di gestione dei servizi tradizionale basato su script di shell in /etc/init*.
+PARTIZIONAMENTO DEL DISCO E MEMORIA SWAP
+La memoria SWAP è utilizzata quando la RAM è satura per evitare rallentamenti e gestire memory leak.
+
+LOGICAL VOLUME MANAGER (LVM)
+LVM permette di gestire lo spazio di archiviazione in modo flessibile, aggregando più dischi in un unico volume gestibile.
+
+LIBRERIE STATICHE E DINAMICHE
+Statiche: Incorporate nel programma durante la compilazione, rendendolo indipendente.
+Dinamiche: Caricate durante l'esecuzione, risparmiando spazio in memoria.
+APT E DNF PACKAGE MANAGER
+APT: Gestore di pacchetti per sistemi Debian-based.
+DNF: Gestore di pacchetti per sistemi Red Hat-based.
+CONTAINER VS VIRTUALIZATION
+Virtualizzazione: Esecuzione di più sistemi operativi su un singolo server fisico.
+Containerizzazione: Esecuzione di applicazioni in ambienti isolati con tutti i componenti necessari.
+TTY VS PTS
+TTY: Terminale fisico per connessioni locali.
+PTS: Terminale emulato per connessioni remote.
+SHOP
+Il comando shopt gestisce opzioni della shell e alias per personalizzare il comportamento della shell.
+
+HISTORY
+La cronologia di Bash mantiene un registro dei comandi eseguiti, facilitando il richiamo e la ripetizione.
+
+UNAME
+Il comando uname fornisce informazioni sul sistema operativo e sulla macchina.
+
+QUOTING
+L'uso delle virgolette in Bash controlla come vengono interpretate le stringhe e le variabili.
+
+FILTRI
+I filtri sono comandi utilizzati per manipolare e analizzare il testo nei file.
+
+MANIPOLAZIONE DEL TESTO
+sed è uno strumento per modificare il testo nei file. Le espressioni regolari (Regex) sono utilizzate per validare e modificare input testuali.
+
+CALCOLO DELL'HASH
+Il calcolo dell'hash trasforma i dati di un file in una sequenza univoca di caratteri alfanumerici.
+
+ZIP-UNZIP
+Strumenti per comprimere e decomprimere file in vari formati.
+
+FILE GREZZI
+Il comando dd legge e scrive dati grezzi, permettendo di clonare un disco bypassando il file system.
